@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konversi Presentasi ke PDF - BPJS Kesehatan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #003DA5 0%, #0055d4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 61, 165, 0.3);
+            max-width: 600px;
+            padding: 50px 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #003DA5;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .instructions {
+            background: #E8F1FF;
+            border-left: 5px solid #003DA5;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .instructions h3 {
+            color: #003DA5;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .instructions li {
+            margin-bottom: 12px;
+        }
+
+        .method {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .method strong {
+            color: #003DA5;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: #003DA5;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0033a0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 61, 165, 0.3);
+        }
+
+        .btn-secondary {
+            background: #E8F1FF;
+            color: #003DA5;
+            border: 2px solid #003DA5;
+        }
+
+        .btn-secondary:hover {
+            background: #003DA5;
+            color: white;
+        }
+
+        .highlight {
+            background: #FFF9E6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #FF6B35;
+        }
+
+        .highlight strong {
+            color: #FF6B35;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .feature {
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 8px;
+            border-left: 4px solid #00A86B;
+        }
+
+        .feature strong {
+            color: #003DA5;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .feature span {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .browser-specific {
+            background: #FFF3CD;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #FFC107;
+            text-align: left;
+        }
+
+        .browser-specific strong {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #c3e6cb;
+        }
+
+        .copy-code {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .copy-btn:hover {
+            background: #e55a2b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Konversi Presentasi ke PDF</h1>
+        <p class="description">
+            Panduan lengkap untuk mengkonversi presentasi HTML BPJS Kesehatan menjadi PDF
+        </p>
+
+        <!-- Feature List -->
+        <div class="feature-list">
+            <div class="feature">
+                <strong>✨ Mudah</strong>
+                <span>Proses cepat tanpa software tambahan</span>
+            </div>
+            <div class="feature">
+                <strong>⚡ Cepat</strong>
+                <span>Hasil PDF siap dalam hitungan detik</span>
+            </div>
+            <div class="feature">
+                <strong>📱 Responsive</strong>
+                <span>Berfungsi di semua device & browser</span>
+            </div>
+            <div class="feature">
+                <strong>🎨 Profesional</strong>
+                <span>Desain BPJS resmi terjaga sempurna</span>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <strong>⭐ Rekomendasi:</strong> Gunakan <strong>Google Chrome</strong> untuk hasil PDF terbaik!
+        </div>
+
+        <!-- Method 1: Browser Print -->
+        <div class="instructions">
+            <h3>📌 Metode 1: Print dari Browser (Termudah)</h3>
+            <ol>
+                <li>Buka presentasi HTML di browser (Chrome/Firefox/Safari/Edge)</li>
+                <li>Tekan: <strong>Ctrl+P</strong> (Windows) atau <strong>Cmd+P</strong> (Mac)</li>
+                <li>Di destination pilih: <strong>"Save as PDF"</strong></li>
+                <li>Klik <strong>Save</strong> dan pilih lokasi penyimpanan</li>
+                <li>✅ Selesai! File PDF siap digunakan</li>
+            </ol>
+        </div>
+
+        <div class="browser-specific">
+            <strong>💡 Tips per Browser:</strong>
+            <div style="margin-top: 10px;">
+                <div style="margin-bottom: 8px;"><strong>Chrome:</strong> Ctrl+P → More Settings → Margins: None → Save as PDF</div>
+                <div style="margin-bottom: 8px;"><strong>Firefox:</strong> Ctrl+P → "Save to PDF" → Save</div>
+                <div style="margin-bottom: 8px;"><strong>Safari:</strong> Cmd+P → PDF (dropdown) → Save as PDF</div>
+                <div><strong>Edge:</strong> Ctrl+P → "Microsoft Print to PDF" → Print</div>
+            </div>
+        </div>
+
+        <!-- Method 2: Online -->
+        <div class="instructions">
+            <h3>📌 Metode 2: Akses Online (GitHub Pages)</h3>
+            <p style="margin-bottom: 15px;">Presentasi sudah di-deploy ke GitHub Pages:</p>
+            <div class="copy-code">
+                https://deputisppti.github.io/websiteBPJS/PRESENTASI_WEBSITE_BPJS.html
+            </div>
+            <ol>
+                <li>Buka URL di atas di browser</li>
+                <li>Tekan: <strong>Ctrl+P</strong> atau <strong>Cmd+P</strong></li>
+                <li>Save as PDF</li>
+                <li>✅ File PDF tersimpan</li>
+            </ol>
+        </div>
+
+        <!-- Method 3: Node.js Server -->
+        <div class="instructions">
+            <h3>📌 Metode 3: Jalankan Lokal dengan Server</h3>
+            <ol>
+                <li>Install Node.js (jika belum): https://nodejs.org</li>
+                <li>Buka Terminal/Command Prompt</li>
+                <li>Masuk ke folder project:
+                    <div class="copy-code" style="margin: 10px 0;">cd websiteBPJS</div>
+                </li>
+                <li>Jalankan server:
+                    <div class="copy-code" style="margin: 10px 0;">npx http-server -p 8080</div>
+                </li>
+                <li>Buka browser: <strong>http://localhost:8080/PRESENTASI_WEBSITE_BPJS.html</strong></li>
+                <li>Tekan: <strong>Ctrl+P</strong> → <strong>Save as PDF</strong></li>
+                <li>✅ PDF siap!</li>
+            </ol>
+        </div>
+
+        <!-- Python Alternative -->
+        <div class="method">
+            <strong>🐍 Alternatif: Gunakan Python 3</strong>
+            <div class="copy-code" style="margin: 10px 0;">
+python -m http.server 8080
+            </div>
+            <p style="margin-top: 10px; color: #666;">Kemudian buka: <strong>http://localhost:8080/PRESENTASI_WEBSITE_BPJS.html</strong></p>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="instructions">
+            <h3>🎯 Best Practices PDF Export</h3>
+            <ol>
+                <li><strong>Browser:</strong> Gunakan Chrome/Edge untuk hasil terbaik</li>
+                <li><strong>Margins:</strong> Set ke "None" atau "Minimal" untuk layout optimal</li>
+                <li><strong>Background:</strong> Enable "Background graphics" untuk warna BPJS sempurna</li>
+                <li><strong>Format:</strong> Ukuran paper "A4" portrait mode</li>
+                <li><strong>Scale:</strong> Pertahankan 100% scale asli</li>
+            </ol>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="button-group">
+            <a href="PRESENTASI_WEBSITE_BPJS.html" class="btn btn-primary" target="_blank">
+                📊 Buka Presentasi HTML
+            </a>
+            <a href="PRESENTASI_WEBSITE_BPJS.md" class="btn btn-secondary" target="_blank">
+                📝 Buka Markdown Slide
+            </a>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="highlight" style="margin-top: 40px;">
+            <strong>📱 Presentasi juga tersedia di:</strong>
+            <ul style="margin-top: 10px; margin-left: 20px; text-align: left; color: #666;">
+                <li><strong>HTML Interaktif:</strong> PRESENTASI_WEBSITE_BPJS.html</li>
+                <li><strong>Markdown:</strong> PRESENTASI_WEBSITE_BPJS.md (untuk PowerPoint/Google Slides)</li>
+                <li><strong>GitHub:</strong> github.com/deputisppti/websiteBPJS</li>
+                <li><strong>Online:</strong> deputisppti.github.io/websiteBPJS</li>
+            </ul>
+        </div>
+
+        <!-- Support -->
+        <div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee;">
+            <p style="color: #666; font-size: 0.95em;">
+                💬 <strong>Butuh bantuan?</strong><br>
+                📧 Email: deputi.sppti@bpjs-kesehatan.go.id<br>
+                ☎️ BPJS Hotline: 165 (24 Jam)<br>
+                📱 WhatsApp: 0811-8165-165
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-focus presentasi saat buka tab baru
+        function openPresentation() {
+            window.open('PRESENTASI_WEBSITE_BPJS.html', '_blank');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Copied to clipboard!');
+            }).catch(() => {
+                alert('❌ Copy failed. Please copy manually.');
+            });
+        }
+
+        // Print friendly version untuk export PDF
+        function printPDF() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
