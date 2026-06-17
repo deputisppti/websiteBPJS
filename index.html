@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal BPJS Kesehatan - Akses layanan JKN-KIS cepat, mudah, dan elegan.">
+    <title>BPJS Kesehatan - Portal Layanan Digital</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <div class="logo-area" onclick="navigateTo('beranda')">
+                <div class="bpjs-logo">
+                    <!-- Refined Official Gotong Royong style BPJS logo -->
+                    <span class="logo-icon">
+                        <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Circular background green -->
+                            <rect width="100" height="100" rx="50" fill="#009245"/>
+                            <!-- Gotong royong white human linkage pattern -->
+                            <circle cx="50" cy="50" r="32" stroke="white" stroke-width="4" stroke-dasharray="10 6" />
+                            <circle cx="50" cy="50" r="16" fill="white"/>
+                            <path d="M50 12V34M50 66V88M12 50H34M66 50H88" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <div class="logo-text">
+                        <span class="brand-name">BPJS Kesehatan</span>
+                        <span class="brand-sub">Badan Penyelenggara Jaminan Sosial</span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="#beranda" class="nav-item active" data-view="beranda">Beranda</a>
+                <a href="#status" class="nav-item" data-view="status">Cek Status</a>
+                <a href="#kalkulator" class="nav-item" data-view="kalkulator">Kalkulator Iuran</a>
+                <a href="#kamar" class="nav-item" data-view="kamar">Kamar Inap</a>
+                <a href="#program" class="nav-item" data-view="program">Program BPJS</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="btn btn-secondary btn-sm" onclick="navigateTo('portal')" id="portal-sso-btn">
+                    <i class="material-icons-round">login</i> <span>Portal JKN</span>
+                </button>
+                <button class="menu-toggle" id="menu-toggle" aria-label="Buka Menu"><i class="material-icons-round">menu</i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Side Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <h3>Menu Utama</h3>
+            <button class="btn-close" id="drawer-close"><i class="material-icons-round">close</i></button>
+        </div>
+        <div class="drawer-links">
+            <a href="#beranda" class="drawer-item" data-view="beranda"><i class="material-icons-round">home</i> Beranda</a>
+            <a href="#status" class="drawer-item" data-view="status"><i class="material-icons-round">verified_user</i> Cek Status</a>
+            <a href="#kalkulator" class="drawer-item" data-view="kalkulator"><i class="material-icons-round">calculate</i> Kalkulator Iuran</a>
+            <a href="#kamar" class="drawer-item" data-view="kamar"><i class="material-icons-round">bed</i> Kamar Inap</a>
+            <a href="#program" class="drawer-item" data-view="program"><i class="material-icons-round">layers</i> Program BPJS</a>
+            <a href="#portal" class="drawer-item" data-view="portal"><i class="material-icons-round">account_circle</i> Portal JKN</a>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        
+        <!-- ================= PAGE 1: BERANDA ================= -->
+        <section class="view-panel active" id="view-beranda">
+            <div class="home-hero">
+                <div class="hero-left">
+                    <span class="tagline">Kemudahan Informasi JKN-KIS</span>
+                    <h1>Layanan Kesehatan Cepat, Setara & Transparan</h1>
+                    <p>Temukan solusi kebutuhan administrasi BPJS Anda tanpa keluar rumah. Cukup pilih layanan mandiri di bawah ini untuk memulai.</p>
+                    
+                    <div class="search-bar-wrapper">
+                        <i class="material-icons-round search-icon">search</i>
+                        <input type="text" placeholder="Masukkan kata kunci pencarian (misal: 'iuran', 'rehab', 'kamar')..." id="hero-search">
+                        <button class="btn btn-secondary" onclick="handleHeroSearch()">Cari</button>
+                    </div>
+                </div>
+                
+                <div class="hero-right">
+                    <!-- Elegant simulated BPJS KIS Card -->
+                    <div class="kis-card-outer">
+                        <div class="kis-card">
+                            <div class="kis-card-header">
+                                <div class="card-brand">
+                                    <svg width="20" height="20" viewBox="0 0 100 100" fill="none">
+                                        <rect width="100" height="100" rx="50" fill="#ffffff"/>
+                                        <path d="M50 20C33.4315 20 20 33.4315 20 50C20 66.5685 33.4315 80 50 80C66.5685 80 80 66.5685 80 50C80 33.4315 66.5685 20 50 20ZM46 32V46H32V54H46V68H54V54H68V46H54V32H46Z" fill="#009245"/>
+                                    </svg>
+                                    <span>KARTU INDONESIA SEHAT</span>
+                                </div>
+                                <span class="card-status-badge">AKTIF</span>
+                            </div>
+                            <div class="card-chip"></div>
+                            <div class="card-number-display">0001 2345 6789 0</div>
+                            <div class="card-footer-info">
+                                <div class="col">
+                                    <span class="label">NAMA PESERTA</span>
+                                    <span class="value">BUDI SANTOSO</span>
+                                </div>
+                                <div class="col">
+                                    <span class="label">KELAS RAWAT</span>
+                                    <span class="value">KELAS I</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple, Clean Grid Services (Direct Page Routing) -->
+            <div class="services-headline">
+                <h2>Layanan Mandiri</h2>
+                <p>Pilih salah satu kartu untuk langsung menuju ke halaman layanan terkait</p>
+            </div>
+            
+            <div class="clean-grid">
+                <div class="action-card color-blue" onclick="navigateTo('status')">
+                    <div class="card-icon"><i class="material-icons-round">assignment_ind</i></div>
+                    <h3>Cek Kepesertaan</h3>
+                    <p>Periksa keaktifan kartu BPJS Kesehatan Anda cukup dengan NIK.</p>
+                    <span class="link-label">Buka Halaman <i class="material-icons-round">east</i></span>
+                </div>
+
+                <div class="action-card color-green" onclick="navigateTo('kalkulator')">
+                    <div class="card-icon"><i class="material-icons-round">calculate</i></div>
+                    <h3>Kalkulator Iuran</h3>
+                    <p>Hitung nominal iuran bulanan untuk Mandiri maupun Karyawan.</p>
+                    <span class="link-label">Buka Halaman <i class="material-icons-round">east</i></span>
+                </div>
+
+                <div class="action-card color-teal" onclick="navigateTo('kamar')">
+                    <div class="card-icon"><i class="material-icons-round">airline_seat_flat</i></div>
+                    <h3>Info Kamar Inap</h3>
+                    <p>Cek ketersediaan tempat tidur kosong di Rumah Sakit secara real-time.</p>
+                    <span class="link-label">Buka Halaman <i class="material-icons-round">east</i></span>
+                </div>
+
+                <div class="action-card color-purple" onclick="navigateTo('program')">
+                    <div class="card-icon"><i class="material-icons-round">payment</i></div>
+                    <h3>Program REHAB & JKN</h3>
+                    <p>Simulasikan cicilan tunggakan (REHAB) dan info program BPJS.</p>
+                    <span class="link-label">Buka Halaman <i class="material-icons-round">east</i></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: CEK STATUS ================= -->
+        <section class="view-panel" id="view-status">
+            <div class="subpage-header">
+                <h2>Cek Status Kepesertaan JKN-KIS</h2>
+                <p>Ketikkan NIK (16 digit) atau Nomor Kartu BPJS untuk memvalidasi status jaminan kesehatan Anda.</p>
+            </div>
+
+            <div class="card-form-wrapper">
+                <div class="minimal-form-card">
+                    <form id="page-status-form" onsubmit="handleStatusSearch(event)">
+                        <div class="form-group-clean">
+                            <label for="status-nik">Nomor NIK / No. Kartu BPJS</label>
+                            <input type="text" id="status-nik" placeholder="Contoh: 3201234567890123" maxlength="16" required>
+                        </div>
+                        <div class="form-group-clean">
+                            <label for="status-dob">Tanggal Lahir</label>
+                            <input type="date" id="status-dob" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Periksa Kepesertaan</button>
+                    </form>
+                </div>
+
+                <!-- Result Box (In-line on page) -->
+                <div class="status-result-container hidden" id="status-page-result">
+                    <div class="result-card-header">
+                        <div class="user-details">
+                            <h3 id="p-res-name">Siti Aminah</h3>
+                            <p id="p-res-id">NIK/No. BPJS: 3201234567890123</p>
+                        </div>
+                        <span id="p-res-badge" class="badge-status success">AKTIF</span>
+                    </div>
+                    <div class="result-details-grid">
+                        <div class="detail-item">
+                            <span class="lbl">Kategori Peserta</span>
+                            <strong id="p-res-type">Pekerja Bukan Penerima Upah (Mandiri)</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="lbl">Kelas Perawatan</span>
+                            <strong id="p-res-class">Kelas 2 (Dua)</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="lbl">Faskes Tingkat I (FKTP)</span>
+                            <strong id="p-res-faskes">Puskesmas Rawasari</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="lbl">Status Iuran</span>
+                            <strong id="p-res-arrears" class="text-green">Rp0,- (Lunas)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: KALKULATOR ================= -->
+        <section class="view-panel" id="view-kalkulator">
+            <div class="subpage-header">
+                <h2>Kalkulator Simulasi Iuran Bulanan</h2>
+                <p>Simulasikan perhitungan tagihan BPJS berdasarkan kategori kepesertaan Mandiri atau Karyawan Penerima Upah.</p>
+            </div>
+
+            <div class="calc-page-grid">
+                <div class="calc-form-card">
+                    <div class="form-group-clean">
+                        <label>Kategori Kepesertaan</label>
+                        <div class="pill-selectors">
+                            <label class="pill-select">
+                                <input type="radio" name="calc-mode" value="mandiri" checked onchange="toggleCalculatorMode()">
+                                <span class="pill-text">Mandiri (Informal/PBPU)</span>
+                            </label>
+                            <label class="pill-select">
+                                <input type="radio" name="calc-mode" value="ppu" onchange="toggleCalculatorMode()">
+                                <span class="pill-text">Pekerja Penerima Upah (PPU)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Mandiri Options -->
+                    <div id="section-mandiri-inputs">
+                        <div class="form-group-clean">
+                            <label for="page-calc-class">Kelas Rawat Inap</label>
+                            <select id="page-calc-class" onchange="runPageCalculation()">
+                                <option value="1">Kelas 1 — Rp150.000 / orang / bulan</option>
+                                <option value="2">Kelas 2 — Rp100.000 / orang / bulan</option>
+                                <option value="3">Kelas 3 — Rp35.000 / orang / bulan (Subsidi)</option>
+                            </select>
+                        </div>
+                        <div class="form-group-clean">
+                            <label for="page-calc-members">Jumlah Tanggungan Keluarga</label>
+                            <input type="number" id="page-calc-members" value="1" min="1" max="10" oninput="runPageCalculation()">
+                        </div>
+                    </div>
+
+                    <!-- PPU Options -->
+                    <div id="section-ppu-inputs" class="hidden">
+                        <div class="form-group-clean">
+                            <label for="page-calc-salary">Gaji Pokok Bulanan (Rp)</label>
+                            <div class="input-with-label">
+                                <span class="input-prefix">Rp</span>
+                                <input type="number" id="page-calc-salary" value="5000000" min="100000" oninput="runPageCalculation()">
+                            </div>
+                            <span class="help-text">Dasar perhitungan iuran dibatasi minimal UMK dan maksimal Rp12.000.000.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-summary-card">
+                    <h3>Ringkasan Perhitungan</h3>
+                    
+                    <div class="summary-total-box">
+                        <span class="total-label" id="calc-tag-label">ESTIMASI TOTAL BULANAN</span>
+                        <div class="total-value" id="page-calc-total">Rp 150.000</div>
+                    </div>
+
+                    <div class="summary-details">
+                        <div class="sum-row">
+                            <span>Sektor Kepesertaan</span>
+                            <strong id="sum-type">Mandiri (Informal)</strong>
+                        </div>
+                        <div class="sum-row" id="sum-row-class">
+                            <span>Kelas Perawatan</span>
+                            <strong id="sum-class">Kelas 1</strong>
+                        </div>
+                        <div class="sum-row" id="sum-row-members">
+                            <span>Jumlah Orang</span>
+                            <strong id="sum-members">1 Orang</strong>
+                        </div>
+                        <div class="sum-row hidden" id="sum-row-employer">
+                            <span>Ditanggung Pemberi Kerja (4%)</span>
+                            <strong id="sum-employer" class="text-blue">Rp0</strong>
+                        </div>
+                        <div class="sum-row hidden" id="sum-row-employee">
+                            <span>Dipotong dari Gaji Anda (1%)</span>
+                            <strong id="sum-employee" class="text-green">Rp0</strong>
+                        </div>
+                    </div>
+
+                    <div class="regulatory-note">
+                        <i class="material-icons-round">info</i>
+                        <p>Simulasi ini berpedoman pada Peraturan Presiden yang berlaku mengenai tarif jaminan kesehatan nasional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: KAMAR INAP ================= -->
+        <section class="view-panel" id="view-kamar">
+            <div class="subpage-header">
+                <h2>Ketersediaan Tempat Tidur Kamar Inap</h2>
+                <p>Cek ketersediaan kamar rawat inap kosong di rumah sakit rujukan BPJS Kesehatan wilayah Anda secara live.</p>
+            </div>
+
+            <div class="kamar-page-wrapper">
+                <div class="kamar-search-box">
+                    <div class="form-group-clean">
+                        <label for="kamar-city-select">Pilih Kota / Wilayah</label>
+                        <select id="kamar-city-select" onchange="queryKamarInap()">
+                            <option value="jakarta">DKI Jakarta (Pusat & Timur)</option>
+                            <option value="surabaya">Surabaya & Sidoarjo</option>
+                            <option value="bandung">Bandung Raya</option>
+                        </select>
+                    </div>
+                    <div class="form-group-clean">
+                        <label for="kamar-class-select">Kelas Perawatan</label>
+                        <select id="kamar-class-select" onchange="queryKamarInap()">
+                            <option value="all">Semua Kelas</option>
+                            <option value="vip">VIP</option>
+                            <option value="1">Kelas I</option>
+                            <option value="2">Kelas II</option>
+                            <option value="3">Kelas III</option>
+                            <option value="icu">ICU/ICCU</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" onclick="queryKamarInap()"><i class="material-icons-round">sync</i> Perbarui Data</button>
+                </div>
+
+                <!-- Live Hospital Room Table Grid -->
+                <div class="hospital-beds-container" id="hospital-beds-list">
+                    <!-- Dynamic rendering in app.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5: PROGRAM BPJS & REHAB ================= -->
+        <section class="view-panel" id="view-program">
+            <div class="subpage-header">
+                <h2>Program BPJS Kesehatan & Simulator REHAB</h2>
+                <p>Cari tahu program strategis JKN-KIS untuk meringankan pembiayaan Anda, termasuk program pembayaran cicilan tunggakan (REHAB).</p>
+            </div>
+
+            <div class="program-page-grid">
+                <!-- Program Descriptions -->
+                <div class="program-info-col">
+                    <div class="program-card">
+                        <div class="p-card-header">
+                            <i class="material-icons-round bg-green-light text-green">payment</i>
+                            <h3>Program REHAB (Cicilan Tunggakan)</h3>
+                        </div>
+                        <p>Rencana Pembayaran Bertahap (REHAB) diperuntukkan bagi peserta pekerja mandiri (PBPU) yang memiliki tunggakan iuran mulai dari 4 hingga 24 bulan. Program ini memberikan kemudahan untuk mencicil pembayaran iuran secara bertahap agar kartu kepesertaan dapat aktif kembali.</p>
+                        <ul class="p-benefits">
+                            <li><i class="material-icons-round">check</i> Ringan: Cicilan disesuaikan kemampuan bayar</li>
+                            <li><i class="material-icons-round">check</i> Mudah: Pendaftaran langsung dari website/Mobile JKN</li>
+                            <li><i class="material-icons-round">check</i> Cepat: Kartu langsung aktif setelah cicilan lunas</li>
+                        </ul>
+                    </div>
+
+                    <div class="program-card">
+                        <div class="p-card-header">
+                            <i class="material-icons-round bg-blue-light text-blue">volunteer_activism</i>
+                            <h3>Program JKN-KIS PANDU</h3>
+                            </div>
+                        <p>Penatalaksanaan Penyakit Kronis Terpadu (PANDU) membantu memfasilitasi monitoring kondisi kesehatan bagi penderita Diabetes Melitus tipe II dan Hipertensi di fasilitas tingkat pertama secara rutin.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive REHAB Simulator -->
+                <div class="rehab-simulator-col">
+                    <div class="simulator-card">
+                        <h3>Simulator Pembayaran REHAB</h3>
+                        <p class="sim-desc">Masukkan nilai tunggakan iuran Anda untuk membagi beban pembayaran menjadi cicilan bulanan yang ringan.</p>
+                        
+                        <div class="form-group-clean">
+                            <label for="rehab-arrears">Jumlah Tunggakan Iuran (Rp)</label>
+                            <div class="input-with-label">
+                                <span class="input-prefix">Rp</span>
+                                <input type="number" id="rehab-arrears" value="1200000" min="100000" step="50000" oninput="runRehabSimulation()">
+                            </div>
+                            <span class="help-text">Nilai minimal tunggakan untuk mengikuti REHAB adalah Rp100.000.</span>
+                        </div>
+
+                        <div class="form-group-clean">
+                            <label>Jangka Waktu Cicilan (Bulan)</label>
+                            <div class="period-selectors">
+                                <label class="period-option">
+                                    <input type="radio" name="rehab-period" value="3" checked onchange="runRehabSimulation()">
+                                    <span class="period-text">3 Bulan</span>
+                                </label>
+                                <label class="period-option">
+                                    <input type="radio" name="rehab-period" value="6" onchange="runRehabSimulation()">
+                                    <span class="period-text">6 Bulan</span>
+                                </label>
+                                <label class="period-option">
+                                    <input type="radio" name="rehab-period" value="12" onchange="runRehabSimulation()">
+                                    <span class="period-text">12 Bulan</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Calculation Output -->
+                        <div class="rehab-result-box">
+                            <div class="rehab-row">
+                                <span>Estimasi Angsuran / Bulan:</span>
+                                <strong id="rehab-monthly-val" class="text-green">Rp 400.000</strong>
+                            </div>
+                            <div class="rehab-row">
+                                <span>Total Tagihan:</span>
+                                <span id="rehab-total-val">Rp 1.200.000</span>
+                            </div>
+                            <div class="rehab-row">
+                                <span>Biaya Administrasi:</span>
+                                <span class="text-green">Rp 0 (Gratis)</span>
+                            </div>
+                            
+                            <button class="btn btn-primary btn-full" style="margin-top: 18px;" onclick="registerRehab()">
+                                <i class="material-icons-round">playlist_add_check</i> Daftar Cicilan REHAB
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 6: PORTAL LOGIN & DASHBOARD ================= -->
+        <section class="view-panel" id="view-portal">
+            <div class="portal-sso-wrapper">
+                
+                <!-- SSO LOGIN SCREEN (Shown by default) -->
+                <div class="portal-login-card" id="portal-login-card">
+                    <div class="login-header">
+                        <svg width="40" height="40" viewBox="0 0 100 100" fill="none">
+                            <rect width="100" height="100" rx="50" fill="#009245"/>
+                            <circle cx="50" cy="50" r="32" stroke="white" stroke-width="4" stroke-dasharray="10 6" />
+                            <circle cx="50" cy="50" r="16" fill="white"/>
+                            <path d="M50 12V34M50 66V88M12 50H34M66 50H88" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                        <h3>Portal Layanan JKN-KIS</h3>
+                        <p>Masuk menggunakan nomor kartu BPJS atau NIK terdaftar Anda.</p>
+                    </div>
+
+                    <form id="portal-login-form" onsubmit="handlePortalLogin(event)">
+                        <div class="form-group-clean">
+                            <label for="login-username">Nomor BPJS / NIK / Email</label>
+                            <input type="text" id="login-username" placeholder="Masukkan nomor atau email..." value="0001234567890" required>
+                        </div>
+                        <div class="form-group-clean">
+                            <label for="login-password">Kata Sandi</label>
+                            <input type="password" id="login-password" placeholder="Masukkan kata sandi..." value="password123" required>
+                        </div>
+                        
+                        <!-- Simulated Captha -->
+                        <div class="form-group-clean">
+                            <label for="login-captcha">Masukkan Kode Verifikasi: <strong style="color:var(--primary-blue); font-size:1rem; margin-left:8px;">8 B 9 R</strong></label>
+                            <input type="text" id="login-captcha" placeholder="Ketik kode di atas..." required>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary btn-full">Masuk Portal</button>
+                    </form>
+                    
+                    <div class="login-footer">
+                        <a href="#daftar">Belum memiliki akun? Daftar Baru</a>
+                        <a href="#lupa">Lupa Kata Sandi?</a>
+                    </div>
+                </div>
+
+                <!-- PORTAL DASHBOARD SCREEN (Hidden until logged in) -->
+                <div class="portal-dashboard-card hidden" id="portal-dashboard">
+                    <div class="p-dash-header">
+                        <div class="user-profile-title">
+                            <h3>Selamat Datang di Portal JKN, <span id="dash-username">Budi Santoso</span></h3>
+                            <p>Kategori Kepesertaan: <strong class="text-green">Pekerja Bukan Penerima Upah (Mandiri)</strong></p>
+                        </div>
+                        <button class="btn btn-outline btn-sm" onclick="handlePortalLogout()">Keluar</button>
+                    </div>
+
+                    <div class="p-dash-grid">
+                        <!-- Left Block: Details -->
+                        <div class="dash-member-details">
+                            <h4>Data Kepesertaan Utama</h4>
+                            <div class="dash-rows">
+                                <div class="d-row"><span>No. Kartu KIS</span><strong id="dash-card-no">0001234567890</strong></div>
+                                <div class="d-row"><span>Nomor NIK</span><strong>3201987654321000</strong></div>
+                                <div class="d-row"><span>Faskes Tingkat I</span><strong>Klinik Pratama Cempaka Sehat</strong></div>
+                                <div class="d-row"><span>Kelas Perawatan</span><strong>Kelas I (Satu)</strong></div>
+                                <div class="d-row"><span>Bulan Tagihan Aktif</span><strong class="text-green">Juni 2026 (Lunas)</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Right Block: Quick stats / Actions -->
+                        <div class="dash-action-panel">
+                            <h4>Aksi Cepat Portal</h4>
+                            <div class="dash-buttons-grid">
+                                <button class="dash-act-btn" onclick="navigateTo('kalkulator')">
+                                    <i class="material-icons-round text-blue">calculate</i>
+                                    <span>Simulasi Iuran</span>
+                                </button>
+                                <button class="dash-act-btn" onclick="navigateTo('kamar')">
+                                    <i class="material-icons-round text-green">bed</i>
+                                    <span>Cek Kamar RS</span>
+                                </button>
+                                <button class="dash-act-btn" onclick="navigateTo('status')">
+                                    <i class="material-icons-round text-teal">verified_user</i>
+                                    <span>Verifikasi Status</span>
+                                </button>
+                                <button class="dash-act-btn" onclick="alert('Membuka formulir pindah faskes online...')">
+                                    <i class="material-icons-round text-purple">swap_horiz</i>
+                                    <span>Ubah Faskes</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-left">
+                <div class="logo-area">
+                    <span class="logo-icon-footer">
+                        <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+                            <rect width="100" height="100" rx="50" fill="#ffffff"/>
+                            <circle cx="50" cy="50" r="32" stroke="#009245" stroke-width="4" stroke-dasharray="10 6" />
+                            <circle cx="50" cy="50" r="16" fill="#009245"/>
+                            <path d="M50 12V34M50 66V88M12 50H34M66 50H88" stroke="#009245" stroke-width="5" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    <h4>BPJS Kesehatan</h4>
+                </div>
+                <p>Badan Penyelenggara Jaminan Sosial Kesehatan menyelenggarakan jaminan kesehatan sosial nasional yang inklusif, berkualitas, dan berkelanjutan bagi seluruh rakyat Indonesia.</p>
+            </div>
+            
+            <div class="footer-right">
+                <div class="links-group">
+                    <h5>Layanan Online</h5>
+                    <a href="#kalkulator" onclick="navigateTo('kalkulator')">Simulasi Iuran</a>
+                    <a href="#status" onclick="navigateTo('status')">Validasi Status NIK</a>
+                    <a href="#kamar" onclick="navigateTo('kamar')">Ketersediaan Kamar</a>
+                </div>
+                <div class="links-group">
+                    <h5>Hubungi Kami</h5>
+                    <p>Telepon: 165 (24 Jam)</p>
+                    <p>WhatsApp PANDAWA: 0811-8165-165</p>
+                    <p>Jakarta Pusat, DKI Jakarta</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bar">
+            <div class="container footer-bar-content">
+                <p>&copy; 2026 BPJS Kesehatan. Seluruh Hak Cipta Dilindungi.</p>
+                <div class="footer-sub-links">
+                    <a href="#kebijakan">Kebijakan Privasi</a>
+                    <a href="#syarat">Syarat Penggunaan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING CHATBOT VIRTUAL CHIKA -->
+    <div class="chika-chatbot" id="chika-chatbot">
+        <button class="chatbot-btn" onclick="toggleChikaChat()" aria-label="Tanya Chika">
+            <i class="material-icons-round">chat_bubble</i>
+            <span class="ping-wave"></span>
+        </button>
+        
+        <div class="chat-box hidden" id="chika-chat-box">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+                        <rect width="100" height="100" rx="50" fill="#ffffff"/>
+                        <circle cx="50" cy="50" r="32" stroke="#009245" stroke-width="4" stroke-dasharray="10 6" />
+                        <circle cx="50" cy="50" r="16" fill="#009245"/>
+                        <path d="M50 12V34M50 66V88M12 50H34M66 50H88" stroke="#009245" stroke-width="5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="chat-title-info">
+                    <h4>Chika BPJS</h4>
+                    <span>Online Asisten JKN</span>
+                </div>
+                <button class="chat-close-btn" onclick="toggleChikaChat()"><i class="material-icons-round">close</i></button>
+            </div>
+            
+            <div class="chat-history" id="chika-chat-history">
+                <div class="msg bubble-bot">
+                    Halo! Saya Chika, asisten virtual Anda. Ada yang bisa saya bantu hari ini? Anda bisa memilih salah satu tombol bantuan cepat di bawah ini.
+                </div>
+                <div class="chat-quick-opts" id="chika-quick-opts">
+                    <button onclick="triggerQuickReply('iuran')">Info Tarif Iuran</button>
+                    <button onclick="triggerQuickReply('faskes')">Cari Faskes</button>
+                    <button onclick="triggerQuickReply('ktp')">Berobat Pakai KTP</button>
+                </div>
+            </div>
+            
+            <div class="chat-input-bar">
+                <input type="text" id="chika-msg-input" placeholder="Tulis pesan Anda..." onkeydown="handleChikaKeyDown(event)">
+                <button class="btn-send-chat" onclick="sendChikaMessage()"><i class="material-icons-round">send</i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
