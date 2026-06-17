@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi - Portal Layanan Digital BPJS Kesehatan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bpjs-blue: #003DA5;
+            --bpjs-light: #E8F1FF;
+            --accent: #FF6B35;
+            --success: #00A86B;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bpjs-blue) 0%, #0055d4 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            width: 100%;
+            max-width: 1000px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 61, 165, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-viewer {
+            flex: 1;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 80px 60px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            animation: slideIn 0.5s ease-in-out;
+            background: white;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Slide Styling */
+        .slide-cover {
+            background: linear-gradient(135deg, var(--bpjs-blue) 0%, #0055d4 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .slide-cover h1 {
+            font-size: 3.5em;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .slide-cover p {
+            font-size: 1.5em;
+            opacity: 0.9;
+            margin-bottom: 50px;
+        }
+
+        .slide-cover .logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .slide h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5em;
+            color: var(--bpjs-blue);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slide h2 .material-icons-round {
+            font-size: 2.5em;
+        }
+
+        .slide h3 {
+            font-size: 1.3em;
+            color: var(--text-dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .slide ul, .slide ol {
+            margin-left: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .slide li {
+            margin-bottom: 15px;
+        }
+
+        .feature-box {
+            background: var(--bpjs-light);
+            border-left: 5px solid var(--bpjs-blue);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .feature-box strong {
+            color: var(--bpjs-blue);
+        }
+
+        .benefit-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .benefit-item .icon {
+            color: var(--success);
+            font-size: 1.5em;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .benefit-item span {
+            font-size: 1em;
+            color: var(--text-dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        table th {
+            background: var(--bpjs-blue);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        table tr:hover {
+            background: var(--bpjs-light);
+        }
+
+        .step-box {
+            background: white;
+            border: 2px solid var(--bpjs-blue);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--bpjs-blue);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content p {
+            font-size: 1em;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 60px;
+            background: #f9f9f9;
+            border-top: 2px solid #eee;
+        }
+
+        .btn {
+            background: var(--bpjs-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #0033a0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 61, 165, 0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-download {
+            background: var(--accent);
+        }
+
+        .btn-download:hover {
+            background: #e55a2b;
+        }
+
+        .slide-counter {
+            font-weight: 600;
+            color: var(--bpjs-blue);
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: #eee;
+            margin-bottom: 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--bpjs-blue);
+            transition: width 0.3s ease;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--bpjs-blue) 0%, #0055d4 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .icon-box {
+            background: var(--bpjs-light);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .icon-box .material-icons-round {
+            font-size: 3em;
+            color: var(--bpjs-blue);
+            margin-bottom: 10px;
+        }
+
+        .icon-box p {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+            }
+
+            .slide h2 {
+                font-size: 1.8em;
+            }
+
+            .slide h1 {
+                font-size: 2em;
+            }
+
+            .controls {
+                padding: 15px 30px;
+            }
+
+            .benefit-list, .icon-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <div class="slide-viewer">
+            <!-- Slide 1: Cover -->
+            <div class="slide slide-cover active">
+                <div class="logo">🏥</div>
+                <h1>Portal Layanan Digital BPJS Kesehatan</h1>
+                <p>Website SPA (Single Page Application) Interaktif & Modern</p>
+                <p style="font-size: 1em; margin-top: 50px; opacity: 0.7;">Presentasi | 2026</p>
+            </div>
+
+            <!-- Slide 2: Gambaran Umum -->
+            <div class="slide">
+                <h2><span class="material-icons-round">info</span> Gambaran Umum</h2>
+                <h3>Apa itu Website BPJS?</h3>
+                <ul style="margin-bottom: 30px;">
+                    <li>Portal web modern untuk layanan digital BPJS Kesehatan</li>
+                    <li>Arsitektur SPA (Single Page Application) - responsif & cepat</li>
+                    <li>Dirancang untuk kemudahan akses peserta BPJS Kesehatan</li>
+                    <li>Interface clean, intuitif & user-friendly</li>
+                </ul>
+                <h3>Manfaat Utama:</h3>
+                <div class="benefit-list">
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span>Akses mudah dari mana saja</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span>Informasi real-time</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span>Simulator iuran & cicilan</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span>Bantuan virtual assistant</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Dashboard KIS -->
+            <div class="slide">
+                <h2><span class="material-icons-round">dashboard</span> Dashboard Kartu KIS Digital</h2>
+                <div class="feature-box">
+                    <strong>📱 Fungsi Utama:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Tampilan Kartu Indonesia Sehat (KIS) digital yang responsif</li>
+                        <li>Informasi kepesertaan dalam satu layar</li>
+                        <li>Akses cepat ke semua fitur layanan BPJS</li>
+                        <li>Desain modern & mudah dipahami</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <strong>✨ Manfaat untuk Peserta:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Tidak perlu membawa kartu fisik</li>
+                        <li>Data selalu terupdate & aman</li>
+                        <li>Akses informasi kapan saja</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 4: Cek Status -->
+            <div class="slide">
+                <h2><span class="material-icons-round">verified_user</span> Cek Status Kepesertaan</h2>
+                <div class="feature-box">
+                    <strong>🔍 Fungsi Utama:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Validasi keaktifan kartu BPJS Kesehatan berbasis NIK</li>
+                        <li>Pengecekan status in-line (langsung di halaman)</li>
+                        <li>Hasil instan tanpa perlu loading ke halaman baru</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <strong>⚡ Manfaat untuk Peserta:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Ketahui status kepesertaan Anda real-time</li>
+                        <li>Tidak perlu datang ke kantor BPJS</li>
+                        <li>Proses cepat & transparan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 5: Kalkulator Iuran -->
+            <div class="slide">
+                <h2><span class="material-icons-round">calculate</span> Kalkulator Iuran PPU</h2>
+                <div class="feature-box">
+                    <strong>🧮 Fungsi Utama:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Simulasi perhitungan tarif iuran BPJS bulanan</li>
+                        <li>Sesuai regulasi kelas perawatan terbaru</li>
+                        <li>Kalkulasi per wilayah di seluruh Indonesia</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <strong>💰 Manfaat untuk Peserta:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Tahu persis berapa iuran yang harus dibayar</li>
+                        <li>Bandingkan biaya antar kelas perawatan</li>
+                        <li>Perencanaan finansial yang lebih baik</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 6: Cek Kamar RS -->
+            <div class="slide">
+                <h2><span class="material-icons-round">local_hospital</span> Cek Ketersediaan Kamar RS</h2>
+                <div class="feature-box">
+                    <strong>🏨 Fungsi Utama:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Informasi real-time tempat tidur kosong rumah sakit rujukan</li>
+                        <li>Cakupan wilayah: DKI Jakarta, Surabaya, Bandung</li>
+                        <li>Filter per kelas perawatan</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <strong>📍 Manfaat untuk Peserta:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Tahu RS mana yang masih ada tempat tidur kosong</li>
+                        <li>Proses rujukan lebih cepat & efisien</li>
+                        <li>Perencanaan kesehatan lebih terkoordinasi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 7: Simulator REHAB -->
+            <div class="slide">
+                <h2><span class="material-icons-round">credit_card</span> Simulator REHAB (Cicilan)</h2>
+                <div class="feature-box">
+                    <strong>💳 Fungsi Utama:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Rencana Pembayaran Bertahap (REHAB) untuk iuran tunggakan</li>
+                        <li>Opsi tenor cicilan: 3, 6, atau 12 bulan</li>
+                        <li>Hitung simulasi pembayaran sesuai kemampuan</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <strong>📊 Manfaat untuk Peserta:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Solusi untuk peserta dengan tunggakan iuran</li>
+                        <li>Fleksibilitas tenor sesuai kemampuan</li>
+                        <li>Cicilan dengan bunga terjangkau</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 8: Portal JKN -->
+            <div class="slide">
+                <h2><span class="material-icons-round">security</span> Portal JKN & Login</h2>
+                <div class="feature-box">
+                    <strong>🔐 Fungsi Utama:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Halaman simulasi login portal JKN</li>
+                        <li>Captcha verifikator keamanan</li>
+                        <li>Personal dashboard peserta setelah login</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <strong>🛡️ Manfaat untuk Peserta:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Akses aman ke data pribadi</li>
+                        <li>Dashboard personal dengan info detail</li>
+                        <li>Keamanan data terjamin dengan verifikasi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 9: Chatbot -->
+            <div class="slide">
+                <h2><span class="material-icons-round">support_agent</span> Virtual Assistant Chika</h2>
+                <div class="feature-box">
+                    <strong>🤖 Fungsi Utama:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Bot asisten virtual BPJS Kesehatan</li>
+                        <li>Responsif & interaktif</li>
+                        <li>Menjawab pertanyaan umum peserta</li>
+                    </ul>
+                </div>
+                <div class="feature-box">
+                    <strong>💬 Manfaat untuk Peserta:</strong>
+                    <ul style="margin: 15px 0 0 30px;">
+                        <li>Bantuan 24/7 tanpa harus hubungi customer service</li>
+                        <li>Jawaban instan untuk pertanyaan umum</li>
+                        <li>Support lebih accessible & cepat</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Slide 10: Teknologi -->
+            <div class="slide">
+                <h2><span class="material-icons-round">code</span> Teknologi & Keamanan</h2>
+                <h3>Stack Teknologi:</h3>
+                <div class="icon-grid">
+                    <div class="icon-box">
+                        <div class="material-icons-round">description</div>
+                        <p>HTML5</p>
+                        <span style="font-size: 0.9em; color: var(--text-light);">Struktur Semantik</span>
+                    </div>
+                    <div class="icon-box">
+                        <div class="material-icons-round">palette</div>
+                        <p>Vanilla CSS</p>
+                        <span style="font-size: 0.9em; color: var(--text-light);">Modern Design</span>
+                    </div>
+                    <div class="icon-box">
+                        <div class="material-icons-round">javascript</div>
+                        <p>JavaScript</p>
+                        <span style="font-size: 0.9em; color: var(--text-light);">SPA Logic</span>
+                    </div>
+                    <div class="icon-box">
+                        <div class="material-icons-round">public</div>
+                        <p>Google Fonts</p>
+                        <span style="font-size: 0.9em; color: var(--text-light);">Premium UI</span>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px;">Keamanan:</h3>
+                <div class="benefit-list">
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">verified</span>
+                        <span>Client-side validation</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">verified</span>
+                        <span>Captcha verifikator</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">verified</span>
+                        <span>Data handling aman</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">verified</span>
+                        <span>Compatible semua device</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 11: Cara Akses -->
+            <div class="slide">
+                <h2><span class="material-icons-round">computer</span> Cara Mengakses Website</h2>
+                <h3>Langkah-langkah Akses:</h3>
+                <div class="step-box">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <p><strong>Buka Browser</strong> - Gunakan Chrome, Firefox, Safari, Edge, atau browser modern lainnya</p>
+                    </div>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <p><strong>Ketik URL</strong> - Masukkan alamat website BPJS digital Anda</p>
+                    </div>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <p><strong>Pilih Fitur</strong> - Tentukan fitur yang ingin digunakan dari menu utama</p>
+                    </div>
+                </div>
+                <div class="step-box">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <p><strong>Gunakan Layanan</strong> - Nikmati berbagai fitur unggulan BPJS Kesehatan digital</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 12: Keunggulan -->
+            <div class="slide">
+                <h2><span class="material-icons-round">star</span> Keunggulan Website BPJS</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Keuntungan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Interface</strong></td>
+                            <td>Modern, clean, user-friendly</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Akses</strong></td>
+                            <td>Mudah, cepat, dari mana saja</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fitur</strong></td>
+                            <td>Lengkap & comprehensive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Responsif</strong></td>
+                            <td>Berfungsi di semua device</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performa</strong></td>
+                            <td>SPA - Loading super cepat</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bantuan</strong></td>
+                            <td>Ada chatbot assistant 24/7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Slide 13: Kesimpulan -->
+            <div class="slide">
+                <h2><span class="material-icons-round">done_all</span> Kesimpulan</h2>
+                <p style="font-size: 1.1em; margin: 20px 0; line-height: 1.8;">Website BPJS Kesehatan adalah solusi digital yang:</p>
+                <div class="benefit-list">
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span><strong>Accessible</strong> - Mudah diakses dari mana saja</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span><strong>Practical</strong> - Fitur-fitur yang benar-benar berguna</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span><strong>Beneficial</strong> - Memberikan value nyata untuk peserta</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span><strong>Modern</strong> - Interface & teknologi terkini</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span><strong>Reliable</strong> - Stabil & responsif</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="icon material-icons-round">check_circle</span>
+                        <span><strong>Secure</strong> - Keamanan data terjamin</span>
+                    </div>
+                </div>
+                <div class="cta-box">
+                    🎯 Gunakan Website BPJS Kesehatan untuk layanan terbaik Anda!
+                </div>
+            </div>
+
+            <!-- Slide 14: Terima Kasih -->
+            <div class="slide slide-cover">
+                <div class="logo">👋</div>
+                <h1>Terima Kasih</h1>
+                <p>Portal Layanan Digital BPJS Kesehatan</p>
+                <p style="margin-top: 50px; font-size: 1em;">Pertanyaan? 💬</p>
+                <p style="opacity: 0.7; margin-top: 30px; font-size: 0.9em;">Hubungi Chika Chatbot atau Customer Service BPJS</p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="prevBtn" onclick="changeSlide(-1)">
+                <span class="material-icons-round">chevron_left</span>
+                Sebelumnya
+            </button>
+            <span class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">14</span>
+            </span>
+            <button class="btn" id="nextBtn" onclick="changeSlide(1)">
+                Selanjutnya
+                <span class="material-icons-round">chevron_right</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide;
+            
+            // Update progress bar
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
